@@ -97,6 +97,19 @@ const appointmentSchema=z.object({
       endTime:z.string().regex(/^\d{2}:\d{2}$/,"End time must be in HH:mm format"),
 })
 
+router.get('/appointments', authenticateToken, async function(req, res) {
+      try {
+          const appointments = await Appointment.find({
+              studentId: req.user.userId
+          });
+          res.status(200).json(appointments);
+      } catch(err) {
+          res.status(500).json({
+              message: "Internal Server Error"
+          });
+      }
+  });
+
 //student get list of all the professors
 router.get('/professors', async function(req, res) {
       try {
