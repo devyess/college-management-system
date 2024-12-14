@@ -137,7 +137,7 @@ router.delete('/availability/:appointmentId', authenticateToken, async function(
               });
           }
   
-          // Check if the appointment is in the future
+          // Check if the appointment have already been completed with respect to the current date
           const appointmentDate = new Date(`${appointment.date}T${appointment.startTime}`);
           if (appointmentDate < new Date()) {
               return res.status(400).json({

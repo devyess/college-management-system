@@ -166,16 +166,16 @@ describe('Appointment Booking Scenario', () => {
     describe('Cancellation Phase', () => {
         it('8. Professor P1 cancels the appointment with Student A1', async () => {
             const res = await request(app)
-                .delete(`/professors/availability/${appointmentT1Id}`) // Changed from 'availability' to 'appointments'
+                .delete(`/professors/availability/${appointmentT1Id}`) 
                 .set('Authorization', `Bearer ${professorP1Token}`);
     
             expect(res.status).toBe(200);
-            expect(res.body.message).toBe('Appointment Cancelled Successfully'); // Made message consistent
+            expect(res.body.message).toBe('Appointment Cancelled Successfully');
         });
     
         it('9. Student A1 checks their appointments and sees no pending appointments', async () => {
             const res = await request(app)
-                .get('/students/appointments') // Made the endpoint more specific
+                .get('/students/appointments') 
                 .set('Authorization', `Bearer ${studentA1Token}`);
     
             expect(res.status).toBe(200);

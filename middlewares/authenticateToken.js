@@ -1,5 +1,6 @@
 const jwt=require("jsonwebtoken");
 
+//this will be a middlewareS to authenticate the students and professors
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(" ")[1];
@@ -7,7 +8,7 @@ const authenticateToken = (req, res, next) => {
   
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) return res.status(403).json({ message: "Invalid token" });
-      req.user = user; // Attach user info to the request
+      req.user = user;
       next();
     });
   };

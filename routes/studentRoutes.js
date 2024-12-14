@@ -110,23 +110,6 @@ router.get('/appointments', authenticateToken, async function(req, res) {
       }
   });
 
-//student get list of all the professors
-router.get('/professors', async function(req, res) {
-      try {
-          const professors = await User.find({ role: "professor" })
-              .select('_id name email') // Only send necessary fields
-              .lean(); // Convert to plain JavaScript objects
-          
-          res.status(200).json({
-              professors
-          });
-      } catch (err) {
-          res.status(500).json({
-              message: "Internal Server Error"
-          });
-      }
-  });
-
 //This endpoint allows students to book an appointment with a professor
 router.post('/appointments',authenticateToken,async function(req,res){
       try{
